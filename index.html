@@ -45,21 +45,7 @@
                 <h2>Updates</h2>
 		<p>
 		</p>
-		<style>
-  		    .timeline-card {
-    		       border: 1px solid ##FFFFFF;
-    		       border-radius: 6px;
-		       padding: 12px 16px;
-    		       margin-bottom: 15px;
-  		       max-width: 600px;
-		       background: #fafafa;
-  		    }
-  		    .timeline-date {
-    			min-width: 110px; /* Adjust as needed */
-    			color: #6F2E7D;
-  		    }
-		</style>
-
+              <div id="timeline-container">
 		<div class="timeline-card">
   		  <div class="timeline-date">[Jul. 2025]</div>
  		  <div> Summer Research Intern at IIT-BHU.</div>
@@ -88,8 +74,65 @@
   		  <div class="timeline-date">[Jun. 2023]</div>
  		  <div> Attended ACM India summer school on 'Cybersecurity'.</div>
 		</div>
+	       </div>
+    	       <button id="readMoreBtn" onclick="toggleUpdates()">Read More</button>
+	       <style>
+  	         .timeline-card {
+    		    border: 1px solid #FFFFFF;
+    		    border-radius: 6px;
+		    padding: 12px 16px;
+		    margin-bottom: 15px;
+		    max-width: 600px;
+		    background: #fafafa;
+		 }
+		 .timeline-date {
+  		    min-width: 110px;
+       		    color: #6F2E7D;
+  		 }
+  		 .hidden {
+  		    display: none;
+ 		 }
+		 #readMoreBtn {
+    		    background-color: #6F2E7D;
+ 		    color: #FFFFFF;
+		    padding: 8px 16px;
+		    border: none;
+		    cursor: pointer;
+		    border-radius: 4px;
+		    font-size: 16px;
+		    margin-top: 15px;
+ 		  }
+  		  #readMoreBtn:hover {
+ 		    background-color: #4a1e5d;
+ 		  }
+		</style>
 
+		<script>
+  		    const VISIBLE_COUNT = 3;
+		    window.onload = function () {
+		    	const timelineCards = document.querySelectorAll('.timeline-card');
+    		    	for (let i = VISIBLE_COUNT; i < timelineCards.length; i++) {
+      			    timelineCards[i].classList.add('hidden');
+   		        }
+		    	const btn = document.getElementById('readMoreBtn');
+    			if (timelineCards.length <= VISIBLE_COUNT) {
+      			    btn.style.display = 'none'; // Hide "Read More" if there are less than or equal to VISIBLE_COUNT updates
+    			}
+		    }
+		    function toggleUpdates() {
+    			const hiddenUpdates = document.querySelectorAll('.timeline-card.hidden');
+    			const btn = document.getElementById('readMoreBtn');
+    			for (let i = 0; i < hiddenUpdates.length; i++) {
+    			    hiddenUpdates[i].classList.toggle('hidden');
+    			}
 
+    			if (btn.innerHTML === 'Read More') {
+     			    btn.innerHTML = 'Show Less';
+    			} else {
+      			    btn.innerHTML = 'Read More';
+    			}
+  		     }
+		 </script>    
                </td>
               </tr>
               <tr>
