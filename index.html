@@ -56,7 +56,7 @@
   		    }
   		    .timeline-date {
     			min-width: 110px; /* Adjust as needed */
-    			color: #BA55D3;
+    			color: #943EA9;
   		    }
 		</style>
 
@@ -133,26 +133,30 @@
 
 
     <tr onmouseout="r2r_stop()" onmouseover="r2r_start()">
-      <td style="padding:16px;width:20%;vertical-align:middle">
-        <div class="one">
-          <img src="images/sentiment_analysis.png" style="width:100%;border-radius:8px;" alt="Translation Project Image">
+        <td colspan="2" style="padding: 16px;">
+        <div style="background-color: #fafafa; padding: 16px; border-radius: 8px; display: flex; gap: 16px; align-items: center;">
+
+        <div style="flex: 0 0 20%;">
+          <img src="images/sentiment_analysis.png.png" style="width:100%;border-radius:8px;" alt="Sentiment Project Image">
         </div>
-      </td>
-      <td style="padding:8px;width:80%;vertical-align:middle">
-          <div class="papertitle">Sentiment Analysis of Twitter Feeds
-</div>
-        </a>
-        <br>
+      
+      <div style="flex: 1;">
+        <div class="papertitle" style="margin-bottom: 8px;">Sentiment Analysis of Twitter Feeds</div>
+       <div>
           <strong>Durga Sharma</strong>, Rahul Johari
+	<div>
+	<em>ICDIS</em>, 2024
 	<br>
-        <em>ICDIS</em>, 2024
-        <br>
-        <a href="https://link.springer.com/chapter/10.1007/978-981-97-9619-9_9" style="color: #BA55D3;">paper</a>
+	<a href="https://link.springer.com/chapter/10.1007/978-981-97-9619-9_9" style="color: #BA55D3;">paper</a>
+       </div>
         <p></p>
-        <p style="text-align: justify;">
+        <p style="text-align: justify; margin-top: 8px;">
 				Analyzed 30,000 tweets about Indian athletes over six months, using `googletrans` to translate non-English tweets and `nltk` for sentiment analysis, scoring each tweet from -1 to +1. Created sentiment vs. time and average sentiment vs. time graphs to track and visualize changing public sentiments towards athletes.
-	</p>
-      </td>
+        </p>
+       </div>
+	      
+      </div>      
+     </td>
     </tr>
 
 
