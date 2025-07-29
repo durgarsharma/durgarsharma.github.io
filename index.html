@@ -93,17 +93,20 @@
   		    display: none;
  		 }
 		 #readMoreBtn {
-    		    background-color: #6F2E7D;
- 		    color: #FFFFFF;
+    		    background-color: #FFFFFF;
+ 		    color: #BA55D3;
 		    padding: 8px 16px;
 		    border: none;
 		    cursor: pointer;
 		    border-radius: 4px;
 		    font-size: 16px;
 		    margin-top: 15px;
+		    text-align: left;
+		    display: inline-block;
  		  }
   		  #readMoreBtn:hover {
  		    background-color: #4a1e5d;
+		    color: #FFFFFF;
  		  }
 		</style>
 
@@ -126,10 +129,14 @@
     			    hiddenUpdates[i].classList.toggle('hidden');
     			}
 
-    			if (btn.innerHTML === 'Read More') {
+    			if (btn.innerHTML === 'Show More') {
      			    btn.innerHTML = 'Show Less';
     			} else {
-      			    btn.innerHTML = 'Read More';
+      			    btn.innerHTML = 'Show More';
+			    const timelineCards = document.querySelectorAll('.timeline-card');
+			    for (let i = VISIBLE_COUNT; i < timelineCards.length; i++) {
+				timelineCards[i].classList.add('hidden');
+			    }
     			}
   		     }
 		 </script>    
