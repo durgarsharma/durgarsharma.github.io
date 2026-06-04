@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Durga Sharma - Art Portfolio</title>
+    <meta name="author" content="Durga Sharma">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <style>
+      /* Gallery Grid Layout */
+      .art-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 16px;
+      }
+      .art-item {
+        text-align: center;
+      }
+      .art-item img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease-in-out;
+        cursor: pointer;
+      }
+      .art-item img:hover {
+        transform: scale(1.03);
+      }
+      .art-caption {
+        margin-top: 8px;
+        font-size: 14px;
+        color: #555;
+      }
+
+      /* Fullscreen Lightbox Overlay */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+
+      /* Lightbox Image */
+      .lightbox-content {
+        max-width: 85%;
+        max-height: 80vh;
+        border-radius: 4px;
+        box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+      }
+
+      /* Lightbox Caption */
+      #lightbox-caption {
+        position: absolute;
+        bottom: 40px;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        width: 100%;
+      }
+
+      /* Navigation Buttons */
+      .close-btn, .nav-btn {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+        text-decoration: none;
+        border: none;
+        background: none;
+        padding: 10px;
+      }
+      .close-btn:hover, .nav-btn:hover {
+        color: #BA55D3;
+      }
+      .close-btn {
+        top: 20px;
+        right: 30px;
+      }
+      .prev-btn {
+        left: 30px;
+      }
+      .next-btn {
+        right: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+      <tbody>
+        <tr>
+          <td style="padding:16px;">
+            <p><a href="index.html" style="color: #BA55D3;">&larr; Back to Home</a></p>
+            <h1 style="border-bottom: 1px solid #eee; padding-bottom: 10px;">Art Portfolio</h1>
+            <p style="text-align: justify; color: #444;">
+              A collection of my creative explorations outside of machine learning and research.
+            </p>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <div class="art-grid">
+              
+              <div class="art-item">
+                <img src="images/art/artwork1.jpg" alt="Title of Artwork 1 (Medium, Year)" onclick="openLightbox(0)">
+                <div class="art-caption">Title of Artwork 1 (Medium, Year)</div>
+              </div>
+
+              <div class="art-item">
+                <img src="images/art/artwork2.jpg" alt="Title of Artwork 2 (Medium, Year)" onclick="openLightbox(1)">
+                <div class="art-caption">Title of Artwork 2 (Medium, Year)</div>
+              </div>
+
+              <div class="art-item">
+                <img src="images/art/artwork3.jpg" alt="Title of Artwork 3 (Medium, Year)" onclick="openLightbox(2)">
+                <div class="art-caption">Title of Artwork 3 (Medium, Year)</div>
+              </div>
+
+              </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:40px 0px 20px 0px;">
+            <p style="text-align:center;font-size:small;">
+              Design and source code are from <a href="https://github.com/jonbarron/jonbarron_website" style="color: #BA55D3;">Jon Barron's Website</a>.
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="artLightbox" class="lightbox">
+      <span class="close-btn" onclick="closeLightbox()">&times;</span>
+      <button class="nav-btn prev-btn" onclick="changeImage(-1)">&#10094;</button>
+      <img id="lightbox-img" class="lightbox-content" src="" alt="Expanded View">
+      <button class="nav-btn next-btn" onclick="changeImage(1)">&#10095;</button>
+      <div id="lightbox-caption"></div>
+    </div>
+
+    <script>
+      let currentIndex = 0;
+      // Automatically populates array from the elements present above
+      const images = document.querySelectorAll('.art-grid .art-item img');
+
+      function openLightbox(index) {
+        currentIndex = index;
+        updateLightbox();
+        document.getElementById("artLightbox").style.display = "flex";
+      }
+
+      function closeLightbox() {
+        document.getElementById("artLightbox").style.display = "none";
+      }
+
+      function changeImage(direction) {
+        currentIndex += direction;
+        // Infinite carousel loops back to start/end
+        if (currentIndex >= images.length) { currentIndex = 0; }
+        if (currentIndex < 0) { currentIndex = images.length - 1; }
+        updateLightbox();
+      }
+
+      function updateLightbox() {
+        const activeImg = images[currentIndex];
+        document.getElementById("lightbox-img").src = activeImg.src;
+        document.getElementById("lightbox-caption").innerHTML = activeImg.alt;
+      }
+
+      // Close lightbox if user clicks anywhere outside the image canvas
+      document.getElementById("artLightbox").addEventListener("click", function(e) {
+        if (e.target === this) {
+          closeLightbox();
+        }
+      });
+
+      // Add keyboard support (Left/Right arrow keys & Escape to close)
+      document.addEventListener("keydown", function(e) {
+        if (document.getElementById("artLightbox").style.display === "flex") {
+          if (e.key === "Escape") closeLightbox();
+          if (e.key === "ArrowRight") changeImage(1);
+          if (e.key === "ArrowLeft") changeImage(-1);
+        }
+      });
+    </script>
+  </body>
+</html>
